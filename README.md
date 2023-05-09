@@ -25,6 +25,11 @@ Iniciar container Postgres
 docker start postgres
 ```
 
+ddddd
+```sh
+npm add celebrate
+npm add -D @types/joi
+
 ---
 ### Anotações
 - Toda chamada que vai utilizar o BD utilizar o await
