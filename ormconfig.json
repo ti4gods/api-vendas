@@ -4,10 +4,8 @@
   "port": 5432,
   "username": "postgres",
   "password": "docker",
-  "database": "apivendasss",
-  "entities": [
-    ".src/modules/**/typeorm/entities/*.ts"
-  ],
+  "database": "apivendas",
+  "entities": ["./src/modules/**/typeorm/entities/*.ts"],
   "migrations": [
     "./src/shared/typeorm/migrations/*.ts"
   ],
