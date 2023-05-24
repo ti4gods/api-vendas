@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 import AppError from "@shared/errors/AppError";
 import authConfig from '@config/auth'
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
@@ -29,7 +29,7 @@ export default function isAutenticated(
     console.log(decodedToken);
 
     //ID do usuário
-    const { sub } = decodedToken as TokenPayload;
+    const { sub } = decodedToken as ITokenPayload;
 
     request.user = {
       id: sub,
