@@ -29,6 +29,19 @@ ddddd
 ```sh
 npm add celebrate
 npm add -D @types/joi
+```
+
+bcryptjs
+```sh
+npm install bcryptjs
+npm install -D @types/bcryptjs
+```
+
+upload images (multer)
+```sh
+npm install multer
+npm install -D @types/multer
+```
 
 ---
 ### Anotações
