@@ -1,7 +1,8 @@
 import { getCustomRepository } from "typeorm";
 import { ProductRepository } from "../typeorm/repositories/ProductsRepository";
 import Product from "../typeorm/entities/Product";
-import  RedisCache from '@shared/cache/RedisCache';
+
+import RedisCache from '@shared/cache/RedisCache';
 
 class ListProductService {
 
@@ -11,9 +12,16 @@ class ListProductService {
 
     const redisCache = new RedisCache();
 
-    const products = productsRepository.find();
+    let products = await redisCache.recover<Product[]>(
+      'api-vendas-PRODUCT_LIST',
+    );
 
-    await redisCache.save('teste', 'teste');
+    //Se não existe cache...
+    if (!products) {
+      products = await productsRepository.find();
+
+      await redisCache.save('api-vendas-PRODUCT_LIST', products)
+    }
 
     return products;
   }
