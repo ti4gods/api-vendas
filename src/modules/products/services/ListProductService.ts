@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { ProductRepository } from "../typeorm/repositories/ProductsRepository";
 import Product from "../typeorm/entities/Product";
+
 import RedisCache from '@shared/cache/RedisCache';
 
 class ListProductService {
@@ -21,8 +22,6 @@ class ListProductService {
 
       await redisCache.save('api-vendas-PRODUCT_LIST', products)
     }
-
-    await redisCache.save('teste', 'teste');
 
     return products;
   }
