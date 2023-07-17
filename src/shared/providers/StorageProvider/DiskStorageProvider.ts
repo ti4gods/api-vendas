@@ -5,7 +5,7 @@ import path from 'path';
 export default class DiskStorageProvider {
   public  async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
-      path.resolve(uploadConfig.tmpdFolder, file),
+      path.resolve(uploadConfig.tmpFolder, file),
       path.resolve(uploadConfig.directory, file),
     );
 
