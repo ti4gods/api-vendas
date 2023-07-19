@@ -6,7 +6,7 @@ import path from "path";
 import uploadConfig from '@config/upload';
 import fs from 'fs';
 import DiskStorageProvider from "@shared/providers/StorageProvider/DiskStorageProvider";
-
+import S3StorageProvider from "@shared/providers/StorageProvider/S3StorageProvider";
 
 interface IRequest {
   user_id: string;
@@ -19,7 +19,6 @@ class UpdateUserAvatarService {
   public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
 
     const usersRepository = getCustomRepository(UserRepository);
-    const StorageProvider = new DiskStorageProvider();
 
     const user = await usersRepository.findById(user_id);
 
@@ -27,13 +26,23 @@ class UpdateUserAvatarService {
       throw new AppError('User not found.');
     }
 
-    if (user.avatar) {
-     await  StorageProvider.deleteFile(user.avatar);
+    if (uploadConfig.driver === 's3') {
+      const s3Provider = new S3StorageProvider();
+      if (user.avatar) {
+        await s3Provider.deleteFile(user.avatar);
+      }
+
+      const fileName = await s3Provider.saveFile(avatarFilename);
+      user.avatar = fileName;
+    } else {
+      const diskProvaider = new S3StorageProvider();
+      if (user.avatar) {
+        await diskProvaider.deleteFile(user.avatar);
+      }
+
+      const fileName = await diskProvaider.saveFile(avatarFilename);
+      user.avatar = fileName;
     }
-
-    const fileName = await StorageProvider.saveFile(avatarFilename);
-
-    user.avatar = fileName;
 
     await usersRepository.save(user);
 
