@@ -34,9 +34,9 @@ class UpdateProductService {
       throw new AppError('There is already one product wih this name.')
     };
 
-    const redisCache = new RedisCache();
+    // const redisCache = new RedisCache();
 
-    await redisCache.invalidade('api-vendas-PRODUCT_LIST');
+    await RedisCache.invalidade('api-vendas-PRODUCT_LIST');
 
     //Atualzando as informações do produto com os novos valores.
     product.name = name;
