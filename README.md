@@ -44,9 +44,6 @@ npm install -D @types/multer
 ```
 
 ---
-### Anotações
-- Toda chamada que vai utilizar o BD utilizar o await
-
 
 
 
