@@ -25,7 +25,7 @@ Iniciar container Postgres
 docker start postgres
 ```
 
-ddddd
+Celebrate
 ```sh
 npm add celebrate
 npm add -D @types/joi
