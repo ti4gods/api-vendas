@@ -1,10 +1,5 @@
 ### Comandos
 
-Execução do ambiente Dev
-```sh
-$ npm run dev
-```
-
 Geração da migration Products
 ```sh
 npm run typeorm migration:create -- -n CreateProducts
